@@ -7,20 +7,6 @@
 
 import Foundation
 
-struct SettingsTable {
-    var sectionsTable: [SectionTable]
-}
-
-struct SectionTable {
-    var nameSection: String
-    var tableCell: [TableCell]
-}
-
-struct TableCell {
-    var imageCell: String
-    var textCell: String
-}
-
 var settingsTable =
 SettingsTable(sectionsTable: [
     SectionTable(nameSection: "", tableCell: [
