@@ -8,16 +8,46 @@
 import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
-    @IBOutlet weak var imageTableViewCell: UIImageView!
-    @IBOutlet weak var textTableViewCell: UILabel!
-    @IBOutlet weak var viewTableViewCell: UIView!
     
+    static let identifier = "SettingsTableViewCell"
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.accessoryType = .none
-        viewTableViewCell.subviews.forEach { $0.removeFromSuperview() }
-    }
+    // MARK: - Views
+
+    private lazy var viewContainerTableViewCell: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.backgroundColor = .green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var textTableViewCell: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = .systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+   
+    private lazy var iconContainerTableViewCell: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+       // view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var iconTableViewCell: UIImageView = {
+        let image = UIImageView()
+        image.tintColor = .white
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
         
     private lazy var switchAirplane: UISwitch = {
         var switchAirplane = UISwitch()
@@ -48,7 +78,6 @@ class SettingsTableViewCell: UITableViewCell {
     }()
     
     
-    
     private lazy var infoBluetooth: UILabel = {
         var infoBluetooth = UILabel()
         
@@ -64,12 +93,55 @@ class SettingsTableViewCell: UITableViewCell {
         var switchVPN = UISwitch()
         return switchVPN
     }()
+  
+    // MARK: - Initial
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(viewContainerTableViewCell)
+        iconContainerTableViewCell.addSubview(iconTableViewCell)
+        viewContainerTableViewCell.addSubview(iconContainerTableViewCell)
+        viewContainerTableViewCell.addSubview(textTableViewCell)
+        
+        
+        contentView.clipsToBounds = true
+        //accessoryType = .disclosureIndicator
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews () {
+        super.layoutSubviews()
+        let size: CGFloat = contentView.frame.size.height - 12
+        viewContainerTableViewCell.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
+        iconContainerTableViewCell.frame = CGRect(x: 10, y: 6, width: size, height: size)
+        
+        //let iconSize: CGFloat = size/1.5
+        iconTableViewCell.frame = CGRect (x: 0, y: 0, width: iconContainerTableViewCell.frame.width, height: iconContainerTableViewCell.frame.height)
+        //iconTableViewCell.center = iconContainerTableViewCell.center
+        
+        textTableViewCell.frame = CGRect (
+            x: 15 + iconContainerTableViewCell.frame.size.width,
+            y: 0,
+            width: viewContainerTableViewCell.frame.size.width - 15 - iconContainerTableViewCell.frame.size.width,
+            height: viewContainerTableViewCell.frame.size.height
+        )
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewContainerTableViewCell.backgroundColor = nil
+        iconContainerTableViewCell.backgroundColor = nil
+        iconTableViewCell.image = nil
+        textTableViewCell.text = nil
+    }
     
     
     func configure(with cell: TableCell) {
         var accessoryCell: UIView!
         
-        imageTableViewCell.image = UIImage(named: cell.imageCell)
+        iconTableViewCell.image = UIImage(named: cell.imageCell)
         textTableViewCell.text = cell.textCell
         
         switch cell.textCell  {
@@ -91,30 +163,25 @@ class SettingsTableViewCell: UITableViewCell {
             accessoryCell = nil
         }
         
-        guard let accessoryCell = accessoryCell else { return }
-        viewTableViewCell.addSubview(accessoryCell)
-        accessoryCell.translatesAutoresizingMaskIntoConstraints = false
+//        guard let accessoryCell = accessoryCell else { return }
+//        iconTableViewCell.addSubview(accessoryCell)
+//        accessoryCell.translatesAutoresizingMaskIntoConstraints = false
+
+//        NSLayoutConstraint.activate([
+//            accessoryCell.centerYAnchor.constraint(equalTo: iconTableViewCell.centerYAnchor),
+//            accessoryCell.heightAnchor.constraint(equalTo: iconTableViewCell.heightAnchor),
+//            accessoryCell.trailingAnchor.constraint(equalTo: iconTableViewCell.trailingAnchor)
+//        ])
+    }
+}
+//MARK: - Constants
+
+extension SettingsTableViewCell {
+    enum Metric {
         
-        NSLayoutConstraint.activate([
-            accessoryCell.centerYAnchor.constraint(equalTo: viewTableViewCell.centerYAnchor),
-            accessoryCell.heightAnchor.constraint(equalTo: viewTableViewCell.heightAnchor),
-            accessoryCell.trailingAnchor.constraint(equalTo: viewTableViewCell.trailingAnchor)
-        ])
+    }
+    
+    enum Strings {
+        
     }
 }
-/*
-class SettingsTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-}
-*/
