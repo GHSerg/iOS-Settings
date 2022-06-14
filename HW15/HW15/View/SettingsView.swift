@@ -8,20 +8,22 @@
 import UIKit
 
 final class SettingsView: UIView {
-    
+
     // MARK: - Views
 
     private lazy var settingsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 10)
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
+
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         return tableView
     }()
-    
-    
+
     // MARK: - Initial
     init() {
         super.init(frame: .zero)
@@ -30,12 +32,11 @@ final class SettingsView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+
         commonInit()
     }
 
     private func commonInit() {
-       // backgroundColor = .red
-        
         setupHierarchy()
         setupLayout()
     }
@@ -44,31 +45,22 @@ final class SettingsView: UIView {
 
     private func setupHierarchy() {
         addSubview(settingsTableView)
-     //   addSubview(stackView)
-     //   stackView.addArrangedSubview(pageControl)
-     //   stackView.addArrangedSubview(buttonView)
+
     }
 
     private func setupLayout() {
- //       settingsTableView.frame = superview?.frame ?? CGRect(x: 100, y: 100, width: 100, height: 100)
-        
-        settingsTableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        settingsTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        settingsTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        settingsTableView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-
-       // stackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Metric.topOffset).isActive = true
-       // stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metric.leftOffset).isActive = true
-       // stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metric.rightOffset).isActive = true
-       // stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Metric.bottomOffset).isActive = true
-
-       // buttonView.heightAnchor.constraint(equalToConstant: Metric.buttonHeight).isActive = true
+        NSLayoutConstraint.activate([
+        settingsTableView.topAnchor.constraint(equalTo: topAnchor),
+        settingsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+        settingsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        settingsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 }
 
 // MARK: - Extension
 extension SettingsView: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return settingsTable.sectionsTable.count
     }
@@ -79,14 +71,13 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath) as? SettingsTableViewCell else { return UITableViewCell()}
-
-       cell.configure(with: settingsTable.sectionsTable[indexPath.section].tableCell[indexPath.row])
+        cell.configure(with: settingsTable.sectionsTable[indexPath.section].tableCell[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
 
-     //   print("\(textOutput) - \(settingsTable.sectionsTable[indexPath.section].tableCell[indexPath.row].textCell)")
+        print("Нажата ячейка - \(settingsTable.sectionsTable[indexPath.section].tableCell[indexPath.row].textCell)")
     }
 }

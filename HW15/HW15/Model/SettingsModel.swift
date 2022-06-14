@@ -16,13 +16,13 @@ SettingsTable(sectionsTable: [
         TableCell(imageCell: "cellular", textCell: "Сотовая связь"),
         TableCell(imageCell: "modem", textCell: "Режим модема"),
         TableCell(imageCell: "vpn", textCell: "VPN")]),
-    
+
     SectionTable(nameSection: "", tableCell: [
         TableCell(imageCell: "notifications", textCell: "Уведомления"),
         TableCell(imageCell: "sounds", textCell: "Звуки, тактильные сигналы"),
         TableCell(imageCell: "focus", textCell: "Фокусирование"),
         TableCell(imageCell: "screen.time", textCell: "Экранное время")]),
-    
+
     SectionTable(nameSection: "", tableCell: [
         TableCell(imageCell: "main", textCell: "Основные"),
         TableCell(imageCell: "command.center", textCell: "Пункт управления"),

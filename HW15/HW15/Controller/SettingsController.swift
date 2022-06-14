@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class SettingsController: UIViewController {
 
     private var settingsView: SettingsView? {
@@ -19,8 +18,7 @@ final class SettingsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.title = "Настройки"
         view = SettingsView()
-
     }
 }
