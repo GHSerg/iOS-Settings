@@ -50,10 +50,10 @@ final class SettingsView: UIView {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-        settingsTableView.topAnchor.constraint(equalTo: topAnchor),
-        settingsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-        settingsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        settingsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            settingsTableView.topAnchor.constraint(equalTo: topAnchor),
+            settingsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            settingsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            settingsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
@@ -70,7 +70,10 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath) as? SettingsTableViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath)
+                                                        as?
+                                                        SettingsTableViewCell else { return UITableViewCell()}
+
         cell.configure(with: settingsTable.sectionsTable[indexPath.section].tableCell[indexPath.row])
         return cell
     }

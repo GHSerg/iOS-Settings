@@ -111,19 +111,19 @@ class SettingsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackViewHorizontal.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
-                constant: Metric.stackViewHorizontalTopConstraintContentView
+                constant: Metric.stackViewHTopConstraintContentView
             ),
             stackViewHorizontal.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
-                constant: Metric.stackViewHorizontalBottomConstraintContentView
+                constant: Metric.stackViewHBottomConstraintContentView
             ),
             stackViewHorizontal.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: Metric.stackViewHorizontalLeadingConstraintContentView
+                constant: Metric.stackViewHLeadingConstraintContentView
             ),
             stackViewHorizontal.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: Metric.stackViewHorizontalTrailingConstraintContentView
+                constant: Metric.stackViewHTrailingConstraintContentView
             ),
             iconImageView.heightAnchor.constraint(equalToConstant: Metric.iconImageViewSize),
             iconImageView.widthAnchor.constraint(equalToConstant: Metric.iconImageViewSize)
@@ -164,9 +164,9 @@ class SettingsTableViewCell: UITableViewCell {
 extension SettingsTableViewCell {
     enum Metric {
         static let iconImageViewSize: CGFloat = 32
-        static let stackViewHorizontalTopConstraintContentView: CGFloat = 6
-        static let stackViewHorizontalBottomConstraintContentView: CGFloat = -6
-        static let stackViewHorizontalLeadingConstraintContentView: CGFloat = 10
-        static let stackViewHorizontalTrailingConstraintContentView: CGFloat = -10
+        static let stackViewHTopConstraintContentView: CGFloat = 6
+        static let stackViewHBottomConstraintContentView: CGFloat = -6
+        static let stackViewHLeadingConstraintContentView: CGFloat = 10
+        static let stackViewHTrailingConstraintContentView: CGFloat = -10
     }
 }
