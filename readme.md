@@ -1,9 +1,9 @@
 # iOS-Settings
  
-<img width="525" alt="4" src="https://user-images.githubusercontent.com/78469282/172052846-adf389de-a11f-4793-b71e-97df4a1b5b23.pn">
+<img width="318" alt="settings" src="https://user-images.githubusercontent.com/78469282/177966534-45173977-3541-4845-a0ab-2a16b4d3c504.png">
 
 # Описание
-Стандартный экран настроек. При нажатии на ячейку в консоль выводится заголовок ячейк.
+Стандартный экран настроек. При нажатии на ячейку в консоль выводится заголовок ячейки.
 Применен паттерн MVC, без Storyboard (интерфейс кодом), Gitflow. 
 
 
@@ -12,7 +12,7 @@ Swift
 
 # Технологии, API/Frameworks, ПО
  - UIKit, NoStoryboard, Autolayout;    
- - OOP, POP, DRY, SOLID, MVС;    
+ - OOP, POP, DRY, SOLID, MVС, ARC;    
  - Fork, GitFlow; 
  - Символы SF.
 
